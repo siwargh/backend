@@ -1,19 +1,22 @@
-var express = require('express');
-var path = require('path');
-var logger = require('morgan');
+var express=require('express');
+var http=require('http');
+var cors=require('cors');
+var mongoClient = require('mongodb').MongoClient;
+var bodyParser=require("body-parser");
+var mongoose = require('mongoose');
+var schema = require('mongoose').Schema;
+var ObjectID = require('mongodb').ObjectID;
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
-var app = express();
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-module.exports = app;
+mongoose.connect('mongodb://localhost:27017/projectdb',{ useNewUrlParser: true });
+var app=express();
+app.use(cors());
+var user=require('./routes/users');
+var invitation=require('./routes/invitations');
+app.use('/users',user);
+app.use('/invitations',invitation);
+app.get("/",function(req,res){
+    res.send("good jobs");
+})
+app.listen(3000,function(){
+console.log("Server listening on 3000");
+})
