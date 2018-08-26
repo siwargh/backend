@@ -2,45 +2,29 @@ var mongoose = require('mongoose');
 
 
 var userSchema = mongoose.Schema({
-    first_name: { type: String, //default:"moussa" 
-},
-    last_name: { type: String, //default:"youssef"
- },
+    first_name: { type: String},
+    last_name: { type: String},
     adresse: {
-        adresse1: { type: String, //default:"mahdia" 
+        adresse1: { type: String  },
+        adresse2: { type: String },
+        city: { type: String},
+        govermant: { type: String },
+        zipcode: { type: Number }
     },
-        adresse2: { type: String,// default:"ksour essef"
-     },
-
-        city: { type: String, 
-        //    default:"rcharcha"
-         },
-        govermant: { type: String,// default:"mahdia"
-     },
-        zipcode: { type: Number,// default:"5146"
-     },},
     geoposition:{
-        langitude:{type:String ,//default:"144.256"
-    },
-        latitude:{type:String , //default:"254.1236"
-    }
-        
+        langitude:{type:String },
+        latitude:{type:String }
     },
 
-    email: { type: String, //default:"salahyoussef@gmail.com" 
-},
-    gender :{type:String, //default:"homme"
-},
-    password: { type: String,
-        // default:"2309" 
-        },
-    photo_url: { type: String,//default:"file:///C:/Users/hed/Downloads/Examen%20TP%20v2.pdf" 
-},
-    occupation: {type:String , //default:"medecin"
-},
+    email: { type: String, required:true},
+    gender :{type:String},
+    password: { type: String  },
+    photo_url: { type: String},
+    date_naiss:{type:Date},
+    occupation: {type:String 
+    },
     friends:[ 
-        userId={type: String ,//default:""
-    }
+        userId={type: String}
     ]
 
 

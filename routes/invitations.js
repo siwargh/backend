@@ -5,9 +5,7 @@ var Invitations = require('../schemas/invitation-schemas');
 var mongoose = require('mongoose');
 var Q = require('q');
  
-router.get('/v1/test', (req, res) => {
-    res.send("true test");
-});
+ 
 
 
 router.get('/v1/all', function (req, res ) {
