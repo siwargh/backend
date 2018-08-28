@@ -16,7 +16,7 @@ router.get('/v1/all', function (req, res) {
     });
 });
 
-router.get('/v1/seul', function (req, res, next) {
+router.get('/v1/:id', function (req, res, next) {
     Users.findById(req.params.id, function (err, user) {
         if (err) return next(err);
         res.json(user);
@@ -30,6 +30,8 @@ router.post('/v1/add', function (req, res) {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
+        city: req.body.city,
+        occupation: req.body.occupation,
         password:req.body.password
     };
     Users.collection.insertOne(theUser, function (err, result) {
@@ -65,7 +67,7 @@ router.post('/v1/authenticate', (req, res) => {
             // authentication successful
 
             res.send({
-                err: "Login Succeed",
+                err: "success",
                 message: user
             });
         } else {

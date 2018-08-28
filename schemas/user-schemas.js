@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var userSchema = mongoose.Schema({
     first_name: { type: String},
     last_name: { type: String},
+    city: { type: String},
     adresse: {
         adresse1: { type: String  },
         adresse2: { type: String },
