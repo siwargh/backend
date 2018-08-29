@@ -3,22 +3,34 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "test": "./node_modules/mocha/bin/mocha -c -G -d --full-trace --inspect --reporter spec ./test/*/*.js -w"
+    "start": "nodemon ./bin/www"
   },
   "dependencies": {
-    "chai-deep-match": "^1.2.1",
+    "bluebird": "^3.5.1",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.4",
     "debug": "~2.6.9",
     "express": "~4.16.0",
-    "lodash": "^4.17.10",
-    "mongoose": "^5.2.6",
-    "morgan": "~1.9.0"
+    "http-errors": "~1.6.2",
+    "jade": "~1.11.0",
+    "mongodb": "^3.1.3",
+    "mongoose": "^5.2.9",
+    "morgan": "~1.9.0",
+    "multer": "^1.3.1",
+    "nodemon": "^1.18.3",
+    "q": "^1.5.1"
   },
-  "devDependencies": {
-    "chai": "^4.1.2",
-    "chai-json": "^1.0.0",
-    "chai-param": "^0.1.2",
-    "mocha": "^5.2.0",
-    "request": "^2.87.0"
-  }
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siwargh/backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/siwargh/backend/issues"
+  },
+  "homepage": "https://github.com/siwargh/backend#readme",
+  "description": ""
 }
