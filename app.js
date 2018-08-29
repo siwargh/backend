@@ -15,7 +15,7 @@ var invitation=require('./routes/invitations');
 var post=require('./routes/posts');
 
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://ferid:toto2018@ds235732.mlab.com:35732/disdonc_db', { 
+mongoose.connect('mongodb://localhost/myproject', { 
 promiseLibrary: require('bluebird') })
 .then(() => console.log('connection succesful'))
 .catch((err) => console.error(err));
