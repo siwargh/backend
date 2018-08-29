@@ -39,7 +39,7 @@ router.post('/v1/add', function (req, res) {
         senderId: senderId,
         recieverId: recieverId
     };
-    
+
     Invitations.create(invitation, function (err, invitation) {
         if (err) {
             res.send({
@@ -47,7 +47,7 @@ router.post('/v1/add', function (req, res) {
                 message: "Cant add invitation"
             });
         }        res.send({
-            err: "succed",
+            err: "succeed",
             message: invitation
         });
     });
@@ -78,16 +78,16 @@ router.get('/v1/invitations/pending/out/', function (req, res) {
 
 
 // Get all pending recieved invitation in (test ok)
-router.get('/v1/invitations/pending/in/', function (req, res) {
+router.get('/v1/pending/in/:id', function (req, res) {
     var receiverId = req.params.id;
-    var invitSenderIds = [];
+    
     Invitations.find({
         recieverId: receiverId
     }, function (err, invitations) {
         if (err) {
-            res.send(err);
+            res.send({err:"fail",message:"cant get pending recived invitations"});
         }
-        res.send(invitations);
+        res.send({err:"succes" , message:invitations});
     });
 });
 
@@ -98,7 +98,7 @@ var updateFriendsArray = function (req, res, next) {
     var recieverId = req.body.invitation.recieverId;
     var friendShipAt = Date.now();
     var invitationId = req.body.invitation._id;
-
+ 
 
     var promise = function () {
         defer = Q.defer();
