@@ -93,8 +93,7 @@ router.get('/v1/pending/in/:id', function (req, res) {
 });
 
 var updateFriendsArray = function (req, res, next) {
-    console.log(req.body);
-    /*var defer = Q.defer();
+    var defer = Q.defer();
     var senderId = req.body.senderId;
     var recieverId = req.body.recieverId;
     var friendShipAt = Date.now();
@@ -135,7 +134,7 @@ var updateFriendsArray = function (req, res, next) {
         }, (err, user) => {
             var tmpfriends = user.friends;
             var friend = {
-                friendId: ''
+                friendId: null
             };
             friend.friendId = senderId;
             friend.friendShipAt = friendShipAt;
@@ -151,8 +150,6 @@ var updateFriendsArray = function (req, res, next) {
                         res.send(err);
                         defer.reject(err);
                     }
-
-
 
                 });
         }); // userModel.findOne;
@@ -174,7 +171,7 @@ var updateFriendsArray = function (req, res, next) {
         defer.resolve();
     } // end promise
     promise();
-    */
+
     next();
 } // end midle ware updateFriendArray
 
