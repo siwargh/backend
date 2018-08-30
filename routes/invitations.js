@@ -8,6 +8,7 @@ var Q = require('q');
 
 
 
+
 router.get('/v1/all', function (req, res) {
     Invitations.find(function (err, invitations) {
         if (err) return (err);
@@ -92,14 +93,13 @@ router.get('/v1/pending/in/:id', function (req, res) {
 });
 
 var updateFriendsArray = function (req, res, next) {
-    var defer = Q.defer();
-
-    var senderId = req.body.invitation.senderId;
-    var recieverId = req.body.invitation.recieverId;
+    console.log(req.body);
+    /*var defer = Q.defer();
+    var senderId = req.body.senderId;
+    var recieverId = req.body.recieverId;
     var friendShipAt = Date.now();
-    var invitationId = req.body.invitation._id;
+    var invitationId = req.body._id;
  
-
     var promise = function () {
         defer = Q.defer();
 
@@ -108,7 +108,7 @@ var updateFriendsArray = function (req, res, next) {
         }, (err, user) => {
             var tmpfriends = user.friends;
             var friend = {
-                friendId: ''
+                friendId: null
             };
             friend.friendId = recieverId;
             friend.friendShipAt = friendShipAt;
@@ -174,14 +174,14 @@ var updateFriendsArray = function (req, res, next) {
         defer.resolve();
     } // end promise
     promise();
+    */
     next();
 } // end midle ware updateFriendArray
 
 
 router.put('/v1/invitations/accept', updateFriendsArray, function (req, res) {
-
-
- 
+    
+    res.send({err:"success",message:"Invitation successfully accepted"});
 });
 
 
