@@ -20,7 +20,7 @@ var userSchema = mongoose.Schema({
     email: { type: String, required:true},
     gender :{type:String},
     password: { type: String  },
-    photo_url: { type: String},
+    avatar_url: { type: String},
     date_naiss:{type:Date},
     occupation: {type:String 
     },
