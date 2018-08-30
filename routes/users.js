@@ -16,10 +16,12 @@ router.get('/v1/all', function (req, res) {
     });
 });
 
-router.get('/v1/:id', function (req, res, next) {
+router.get('/v1/:id', function (req, res) {
     Users.findById(req.params.id, function (err, user) {
-        if (err) return next(err);
-        res.json(user);
+        if (err) {
+            return res.send({err:'fail',message:"Error"});
+        }
+        res.send({err:"success",message:user});
     });
 });
 

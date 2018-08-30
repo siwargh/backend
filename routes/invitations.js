@@ -181,7 +181,39 @@ var updateFriendsArray = function (req, res, next) {
 router.put('/v1/invitations/accept', updateFriendsArray, function (req, res) {
 
 
-    //console.log("request:body   ", req.body);
+ 
+});
+
+
+
+//Renvois le nombre des invitations en cours d'acceptation 
+//Id pram est l'identifiant de curentUser
+router.get('/v1/invitations/pending/in/count/:id',function(req,res){
+    var defer=Q.defer();
+    var id=req.params.id;
+    Invitations.find({recieverId:id},function(err,invitations){
+        if (err) {
+            res.send({err:"fail" , message:"Erreur"});
+            defer.reject(err);
+        }
+        res.send({err:"success" , message:invitations.length});
+        defer.resolve();
+
+    })
+});
+
+router.get('/v1/invitations/pending/in/:id',function(req,res){
+    var defer=Q.defer();
+    var id=req.params.id;
+    Invitations.find({recieverId:id},function(err,invitations){
+        if (err) {
+            res.send({err:"fail" , message:"Erreur"});
+            defer.reject(err);
+        }
+        res.send({err:"success" , message:invitations});
+        defer.resolve();
+
+    })
 });
 
 module.exports = router;
