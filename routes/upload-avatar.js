@@ -2,6 +2,7 @@ var express =require('express');
 var multer=require('multer');
 var Q =require('q');
 var router=express.Router();
+var User=require('../schemas/user-schemas');
 
 var storage = multer.diskStorage({ //multers disk storage settings
     destination: function(req, file, cb) {
@@ -26,9 +27,9 @@ var upload = multer({ //multer settings
     storage: storage
 }).single('avatar');
 
-function updateAvatar(_id, path) {
+function updateAvatar(id, path) {
     var deferred = Q.defer();
-    User.findByIdAndUpdate(_id, { $set: { avatar_url: path } },
+    User.findByIdAndUpdate({ _id: id }, { $set: { avatar_url: path } },
         function(err, doc) {
             if (err) deferred.reject(err.name + ': ' + err.message);
             deferred.resolve();
