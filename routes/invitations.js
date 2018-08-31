@@ -94,8 +94,8 @@ router.get('/v1/pending/in/:id', function (req, res) {
 
 var updateFriendsArray = function (req, res, next) {
     var defer = Q.defer();
-    var senderId = req.body.senderId;
-    var recieverId = req.body.recieverId;
+    var senderId = mongoose.Types.ObjectId(req.body.senderId);
+    var recieverId = mongoose.Types.ObjectId(req.body.recieverId);
     var friendShipAt = Date.now();
     var invitationId = req.body._id;
  

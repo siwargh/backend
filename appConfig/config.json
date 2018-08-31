@@ -1,0 +1,4 @@
+{
+    "devMongoseUrl":"mongodb://localhost/myproject",
+    "prodMongoUrl":"mongodb://ferid:toto2018@ds235732.mlab.com:35732/disdonc_db"
+}

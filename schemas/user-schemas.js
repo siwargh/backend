@@ -25,7 +25,7 @@ var userSchema = mongoose.Schema({
     occupation: {type:String 
     },
     friends:[ 
-        userId={type: mongoose.Schema.Types.ObjectId}
+       // userId : {type: mongoose.Schema.Types.ObjectId}
     ]
 
 

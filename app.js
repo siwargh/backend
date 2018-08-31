@@ -7,6 +7,7 @@ var cors=require('cors');
 var indexRouter = require('./routes/index');
 var mongoose=require('mongoose');
 var bodyParser=require('body-parser');
+var appConfig=require('./appConfig/config.json');
 
 
 
@@ -17,8 +18,7 @@ var post=require('./routes/posts');
 var avatar=require('./routes/upload-avatar');
 
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://localhost/myproject', { 
-promiseLibrary: require('bluebird') })
+mongoose.connect(appConfig.prodMongoUrl, {promiseLibrary: require('bluebird') })
 .then(() => console.log('connection succesful'))
 .catch((err) => console.error(err));
 

@@ -44,7 +44,7 @@ router.post('/v1/add', function (req, res) {
         res.send(theUser);
     });
 
-    // TODO: wo had to crypt password before saved it to mongodb
+    // TODO: we had to crypt password before save it to mongodb
 
 });
 
