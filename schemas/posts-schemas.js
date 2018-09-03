@@ -1,31 +1,67 @@
 var mongoose = require("mongoose");
+var User = require('./user-schemas');
+
 var post = new mongoose.Schema({
-    author :{type:String , default:"5b7e9f4b2d407017f42d699f"},
-    titre: {type: String, default:"cafe"  },
-    contenue: {type: String,  default:"photo" },
-    create_date: { type: Date, default: Date.now },
-    publishing_date: { type: Date, default: Date.now },
-    categorie: { type: String, default:"rest"},
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    content: {
+        type: String
+    },
+    create_date: {
+        type: Date,
+        default: Date.now
+    },
+    publishing_date: {
+        type: Date,
+        default: Date.now
+    },
+    categorie: {
+        type: String
+    },
     place: {
-        adresse1: {  type: String, default:"zone tourrestique"},
-        adresse2: { type: String,default:"mahdia" },
-         
-        city: { type: String,default:"mahdia" },
-        zipcode: {type: Number, default:"5124" },
+        adress1: {
+            type: String
+        },
+        adress2: {
+            type: String
+        },
+
+        city: {
+            type: String
+        },
+        zipcode: {
+            type: Number
+        },
         geoposition: {
-             langitude: {  type: String, default:"142.325" },
-             latitude: {type: String,  default:"541.321" }
+            longitude: {
+                type: String
+            },
+            latitude: {
+                type: String
+            }
         }
     },
-    totalrating: {  type: Number, default:"25" },
-    comments: [
-        { 
-            datecomment: { type: Date, default: Date.now },
-            content: { type: String, default:"very nice" },
-            ownerid: { type: String, default:"5b7e9fe39855dc1ab8c27bd1" }
+    totalrating: {
+        type: Number
+    },
+    comments: [{
+        datecomment: {
+            type: Date,
+            default: Date.now
+        },
+        content: {
+            type: String
+        },
+        ownerid: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true
         }
-    ]
+    }]
 });
 
-    
-module.exports = mongoose.model('Posts', post);
+
+module.exports = mongoose.model('Post', post);
