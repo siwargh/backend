@@ -56,8 +56,8 @@ router.post('/v1/add', function (req, res) {
 });
 
 
-router.delete('/v1/delete', function (req, res, next) {
-    Invitations.findOneAndDelete(req.params.id, req.body, function (err, invitation) {
+router.delete('/v1/delete/:id', function (req, res, next) {
+    Invitations.findOneAndDelete(req.params.id,function (err, invitation) {
         if (err) return next(err);
         res.json(invitation);
     });

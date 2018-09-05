@@ -5,27 +5,28 @@ var Users = require('../schemas/user-schemas');
 var mongoose = require('mongoose');
 var Q = require('q');
 
-router.get('/v1/get/all/:id', function (req, res, next) {
-   
+router.get('/v1/get/all/:id', (req, res, next) => {
     var userId = req.params.id;
     var myFriends = [];
-    return new Promise(function(resolve,reject){
-        Users.findOne({_id:userId}, function (err, doc) {
-            if (err) return reject(err);
-            doc.friends.map(fri => {
-                Users.findOne({_id:fri.friendId},function(error,friend){
-                    if (err) return reject(err);
-                    myFriends.push(friend);  
+
+    async function action() {
+        const currentUser=await Users.findById(userId, (err, user) => {
+            user.friends.map( async (u) => {
+                await Users.findById(u.friendId, async (err, friend) => {
+                    await myFriends.push(friend);
                 });
+                res.send({err:"success",message:myFriends});
             });
-            
+           
         });
-        resolve(myFriends);
-        res.send(myFriends);
-    });
+       
+    } 
+    action().catch(next);
+
     
 });
-  
+
+
 
 
 
