@@ -1,16 +1,15 @@
 var express = require('express');
 var router = express.Router();
-var users = require('../schemas/user-schemas');
+var Users = require('../schemas/user-schemas');
 var Posts = require('../schemas/posts-schemas');
 var mongoose = require('mongoose');
 var Q = require('q');
 
 
-router.get('/v1/all', function (req, res) {
-    Posts.find(function (err, posts) {
-        if (err) return (err);
-        res.send(JSON.stringify(posts));
-        console.log(posts.length);
+router.get('/v1/mur/:id',  (req, res,next)=> {
+    var id=req.params.id;
+    Posts.find({author:id},(err,posts)=>{
+        res.send(posts);
     });
 });
 
