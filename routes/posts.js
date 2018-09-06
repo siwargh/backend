@@ -4,13 +4,15 @@ var Users = require('../schemas/user-schemas');
 var Posts = require('../schemas/posts-schemas');
 var mongoose = require('mongoose');
 var Q = require('q');
+var _ = require('lodash');
 
 
-router.get('/v1/mur/:id',  (req, res,next)=> {
-    var id=req.params.id;
-    Posts.find({author:id},(err,posts)=>{
+router.get('/v1/mur/:id',(req, res,next)=> {
+    Posts.find((err,posts)=>{
+        if(err) return res.send(err);
         res.send(posts);
     });
+   
 });
 
 router.get('/v1/seul', function (req, res, next) {
@@ -59,3 +61,4 @@ router.delete('/v1/delete', function (req, res, next) {
 
 
 module.exports = router;
+
