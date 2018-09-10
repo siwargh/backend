@@ -26,11 +26,6 @@ var userSchema = mongoose.Schema({
     },
     friends:[ 
     
-    ],
-    posts:[
-        
     ]
-
-
 })
-module.exports = mongoose.model('users', userSchema);
+module.exports = mongoose.model('User', userSchema);

@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var Users = require('../schemas/user-schemas');
+var User = require('../schemas/user-schemas');
 var Posts = require('../schemas/posts-schemas');
 var mongoose = require('mongoose');
 var Q = require('q');
@@ -8,18 +8,21 @@ var _ = require('lodash');
 
 
 router.get('/v1/mur/:id',(req, res,next)=> {
-    Posts.find((err,posts)=>{
-        if(err) return res.send(err);
+    Posts.find({}).populate('author').
+    exec(function (err, posts) {
+        if(err) return res.send({err:'Fail',message:err});
         res.send(posts);
     });
    
 });
 
-router.get('/v1/seul', function (req, res, next) {
-    Posts.findById(req.params.id, function (err, post) {
-        if (err) return next(err);
-        res.json(post);
-    });
+router.get('/v1/seul/:id', function (req, res, next) {
+    Posts.findById(req.params.id)
+    .populate('author').
+    exec(function (err, posts) {
+        if(err) return res.send({err:'Fail',message:err});
+        res.send(posts);
+    })
 });
 
 
