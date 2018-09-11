@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var lodash=require('lodash');
 
 
 var userSchema = mongoose.Schema({
@@ -27,5 +28,26 @@ var userSchema = mongoose.Schema({
     friends:[ 
     
     ]
-})
-module.exports = mongoose.model('User', userSchema);
+});
+
+
+userSchema.methods.preparedForClient = function preparedForClient() {
+    const user = this;
+  
+    const preparedUser = lodash.pick(user, [
+      "_id",
+      "first_name",
+      "last_name",
+      "city",
+      "gender",
+      "email",
+      "avatar_url",
+      "occupation"
+    ]);
+    return preparedUser;
+  };
+
+  const User = mongoose.model('User', userSchema);
+
+  module.exports = User;
+  

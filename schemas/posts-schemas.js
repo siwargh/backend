@@ -1,7 +1,10 @@
 var mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
 var User = require('./user-schemas');
+var Comment = require('./comments-schema');
+var lodash = require('lodash');
 
-var post = new mongoose.Schema({
+var postSchema = new mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -47,21 +50,36 @@ var post = new mongoose.Schema({
     totalrating: {
         type: Number
     },
-    comments: [{
-        datecomment: {
-            type: Date,
-            default: Date.now
-        },
-        content: {
-            type: String
-        },
-        ownerid: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: true
-        }
-    }]
+    comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
 });
- 
 
-module.exports = mongoose.model('Post', post);
+postSchema.methods.preparedForClient = function preparedForClient(currentUser) {
+    const post = this;
+  
+    let preparedPost = lodash.pick(post, [
+      "_id", 
+      "author",
+      "content",
+      "create_date",
+      "publishing_date",
+      "categorie",
+      "comments"  
+    ]);
+  
+    //preparedPost.author = preparedPost.author.preparedForClient();
+  
+   
+    // comments section
+    lodash.forEach(preparedPost.comments, (_comment, index) => {
+      preparedPost.comments[index] = _comment.preparedForClient();
+    });
+  
+    return preparedPost;
+  }
+  
+
+
+  const Post = mongoose.model('Post', postSchema);
+
+  module.exports = Post;
+  

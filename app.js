@@ -17,6 +17,7 @@ var invitation=require('./routes/invitations');
 var post=require('./routes/posts');
 var avatar=require('./routes/upload-avatar');
 var friends=require('./routes/friends');
+var comments=require('./routes/comments');
 
 mongoose.Promise = require('bluebird');
 mongoose.connect(appConfig.prodMongoUrl, {promiseLibrary: require('bluebird') })
@@ -45,6 +46,7 @@ app.use('/users',user);
 app.use('/invitations',invitation);
 app.use('/posts',post);
 app.use('/friends',friends);
+app.use('/comments',comments);
 app.use('/avatar',avatar);
 
 module.exports = app;
